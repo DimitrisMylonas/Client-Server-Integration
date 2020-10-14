@@ -77,14 +77,14 @@ class Server(object):
                 flight = self.read_flight(int(flight_id))
 
                 if flight is not None:
-                    response = 'ROK ' + str(flight['id']) + ' ' + flight['status'] + ' ' + flight['time'] #dhmiourgia mhnumatos pou tha stalei ston client
-                    connection.sendall(response.encode('utf-8')) #apostolh mhnymatos
+                    response = 'ROK ' + str(flight['id']) + ' ' + flight['status'] + ' ' + flight['time'] 
+                    connection.sendall(response.encode('utf-8')) 
                 else:
                     connection.sendall('RERR Flight not found'.encode('utf-8'))
 
             elif 'write' in client_request_message:
                 _, id, status, flight_time = client_request_message.split()
-                not_exists = self.write_flight(id, status, flight_time) #an h ptisi yparxei, to not_exists ginetai false alliws true
+                not_exists = self.write_flight(id, status, flight_time) 
                 if not_exists:
                     connection.sendall('WOK Flight added'.encode('utf-8')) 
                 else:
@@ -101,7 +101,7 @@ class Server(object):
                     connection.sendall('Flight not found'.encode('utf-8'))
 
             else:
-                connection.sendall('RERR Wrong choice'.encode('utf-8')) #kamia apo tis treis dynates epiloges
+                connection.sendall('RERR Wrong choice'.encode('utf-8')) 
 
     def start_listening(self):
         connection_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
